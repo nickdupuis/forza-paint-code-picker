@@ -24,13 +24,16 @@ const ColorInfo = ({ selectedColor }: ColorInfoProps) => (
                     <dd>{selectedColor?.["COLOR 1 BRIGHTNESS"]}</dd>
                 </dl>
                 {selectedColor?.["COLOR 2 BRIGHTNESS"] && (
-                    <dl>
-                        <dd>{selectedColor?.["COLOR 2 HUE"]}</dd>
-                        <dt>Saturation</dt>
-                        <dd>{selectedColor?.["COLOR 2 SATURATION"]}</dd>
-                        <dt>Brightness</dt>
-                        <dd>{selectedColor?.["COLOR 2 BRIGHTNESS"]}</dd>
-                    </dl>
+                    <>
+                        <h3>Color 2</h3>
+                        <dl>
+                            <dd>{selectedColor?.["COLOR 2 HUE"]}</dd>
+                            <dt>Saturation</dt>
+                            <dd>{selectedColor?.["COLOR 2 SATURATION"]}</dd>
+                            <dt>Brightness</dt>
+                            <dd>{selectedColor?.["COLOR 2 BRIGHTNESS"]}</dd>
+                        </dl>
+                    </>
                 )}</>
         )}
     </div>

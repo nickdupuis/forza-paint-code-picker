@@ -24,6 +24,11 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
         const nextColorOptions: CarColor[] = colors.filter(color => color.MAKE === selectedManufacturer);
 
         setColorNameOptions(nextColorOptions);
+
+        // Update the selected color to the first in the list when the options change
+        if (nextColorOptions.length && nextColorOptions[0]["COLOUR NAME"]) {
+            setSelectedColorName(nextColorOptions[0]["COLOUR NAME"]);
+        }
     }, [selectedManufacturer])
 
     // Notify parent component of selected color change
