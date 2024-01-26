@@ -9,8 +9,7 @@ import { CarColor } from "~/types/color";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Forza Color Selector" },
   ];
 };
 
@@ -22,20 +21,20 @@ export default function Index() {
   };
 
   return (
-    <div className="flex flex-col bg-gray-300">
+    <div className="flex flex-col bg-gray-300 p-8 h-screen">
       <header>
         <h1 className="text-xl font-bold">Forza Color Selector</h1>
       </header>
-      <div>
+      <div className="flex items-center justify-between">
         <section>
           <ColorPicker handleColorChange={onColorChange} />
         </section>
         <section>
           <ColorInfo selectedColor={selectedColor} />
         </section>
-        <aside>
+        <section>
           <ColorPreview selectedColor={selectedColor} />
-        </aside>
+        </section>
       </div>
     </div>
   );

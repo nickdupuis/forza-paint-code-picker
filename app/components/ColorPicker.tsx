@@ -25,7 +25,7 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
 
         setColorNameOptions(nextColorOptions);
 
-        // Update the selected color to the first in the list when the options change
+        // Update the selected color to the first in the list when the options
         if (nextColorOptions.length && nextColorOptions[0]["COLOUR NAME"]) {
             setSelectedColorName(nextColorOptions[0]["COLOUR NAME"]);
         }
@@ -40,10 +40,10 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
     }, [selectedColorName]);
 
     return (
-        <>
+        <div className="flex flex-col">
             <label>
                 Manufacturer
-                <select defaultValue="" onChange={(e) => setSelectedManufacturer(e.target.value)}>
+                <select className="block w-48" defaultValue="" onChange={(e) => setSelectedManufacturer(e.target.value)}>
                     <option value="" disabled>Select a manufacturer</option>
                     {manufacturers.map((manufacturer) => (
                         <option key={manufacturer}>{manufacturer}</option>
@@ -52,14 +52,14 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
             </label>
             <label>
                 Color
-                <select onChange={(e) => setSelectedColorName(e.target.value)}>
+                <select className="block w-48" onChange={(e) => setSelectedColorName(e.target.value)}>
                     <option value="" disabled>Select a color</option>
                     {colorNameOptions.map((color, idx) => (
                         <option key={color["COLOUR NAME"] + idx}>{color["COLOUR NAME"]}</option>
                     ))}
                 </select>
             </label>
-        </>
+        </div>
     );
 };
 

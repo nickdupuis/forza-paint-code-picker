@@ -41,7 +41,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
         }
     }, [selectedColor]);
 
-    return (
+    return selectedColor ? (
         <>
             <h3 className="text-lg font-bold">Preview</h3>
             <div className="flex">
@@ -49,7 +49,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
                     <span>Color 1:</span>
                     <div
                         style={previewColor1}
-                        className="w-20 h-20 border border-gray-900 mr-4"
+                        className="w-20 h-20 border border-gray-900 mr-16"
                     />
                 </div>
                 <div className="flex flex-col">
@@ -65,7 +65,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
                 </div>
             </div>
         </>
-    );
+    ) : (<></>);
 };
 
 export default ColorPreview
