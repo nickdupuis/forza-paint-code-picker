@@ -1,4 +1,6 @@
-[
+import { CarColor } from "~/types/color";
+
+export const colors: CarColor[] = [
   {
     "MAKE": "3M",
     "COLOUR NAME": "Gloss Atomic Teal",
