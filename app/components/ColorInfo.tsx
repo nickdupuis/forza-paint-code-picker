@@ -4,7 +4,7 @@ export interface ColorInfoProps {
     selectedColor?: CarColor;
 };
 
-export const ColorInfo = ({ selectedColor }: ColorInfoProps) => (
+const ColorInfo = ({ selectedColor }: ColorInfoProps) => (
     // Use a description list to display a list of key/value pairs
     <div>
         Color Info:
