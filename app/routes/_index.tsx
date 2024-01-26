@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { colors } from "util/data/forza-colors";
 import { CarColor } from "~/types/color";
 import ColorInfo from "~/components/ColorInfo";
+import { ColorPreview } from "~/components/ColorPreview";
 
 export const meta: MetaFunction = () => {
   return [
@@ -67,7 +68,7 @@ export default function Index() {
           <ColorInfo selectedColor={selectedColor} />
         </section>
         <aside>
-          Preview
+          <ColorPreview selectedColor={selectedColor} />
         </aside>
       </div>
     </div>

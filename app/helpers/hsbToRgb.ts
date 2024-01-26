@@ -9,7 +9,7 @@
  * @param brightness 
  * @returns {number[]} - A length 3 array representing red/green/blue values
  */
-function convertDecimalHsbToRgb(decimalHue: number, saturation: number, brightness: number) {
+export function hsbToRgb(decimalHue: number, saturation: number, brightness: number) {
     // Hue is the angle around the color wheel
     let hue = decimalHue * 360;
 
