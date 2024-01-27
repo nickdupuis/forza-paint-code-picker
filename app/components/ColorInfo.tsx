@@ -56,9 +56,9 @@ const ColorInfo = ({ selectedColor }: ColorInfoProps) => {
                                     <h3 className="text-lg font-bold">Color 2</h3>
                                     <div>
                                         <ColorDisplay
-                                            hue={color1.hue}
-                                            saturation={color1.saturation}
-                                            brightness={color1.brightness}
+                                            hue={color2.hue}
+                                            saturation={color2.saturation}
+                                            brightness={color2.brightness}
                                         />
                                     </div>
                                 </>
