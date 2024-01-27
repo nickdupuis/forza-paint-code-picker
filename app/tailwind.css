@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles for the color slider handle that require an odd selector, 
+so putting it in here */
+.color-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 25px;
+    background: #FFF;
+    border: 1px solid black;
+    position: relative;
+}
