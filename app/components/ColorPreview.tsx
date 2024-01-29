@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { hsbToRgb } from "~/helpers/hsbToRgb";
-import { CarColor } from "~/types/color";
+import { CarColor } from "~/types/CarColor";
 
 export interface ColorPreviewProps {
     selectedColor?: CarColor;

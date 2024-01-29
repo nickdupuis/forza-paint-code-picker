@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 import { hsbToRgb } from "~/helpers/hsbToRgb";
+import { CarColor } from "~/types/CarColor";
+import { HSBColor } from "~/types/HSBColor";
 
 export interface ColorDisplayProps {
-    hue: number;
-    saturation: number;
-    brightness: number;
+    colorNumber: 1 | 2;
+    selectedColor: CarColor;
 };
 
-const ColorDisplay = (props: ColorDisplayProps) => {
+type SliderMode = "hue" | "saturation" | "brightness";
 
-    const getBackgroundForSliderMode = (mode: string) => {
+const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
+
+    const [color, setColor] = useState<HSBColor>({ hue: "", saturation: "", brightness: "" });
+
+    useEffect(() => {
+        if (selectedColor) {
+            setColor({
+                hue: selectedColor?.[`COLOR ${colorNumber} HUE`],
+                saturation: selectedColor?.[`COLOR ${colorNumber} SATURATION`],
+                brightness: selectedColor?.[`COLOR ${colorNumber} BRIGHTNESS`],
+            });
+        }
+    }, [selectedColor]);
+
+    const getBackgroundForSliderMode = (mode: SliderMode) => {
         // Rough estimate of the color based on hue
-        let [r, g, b] = hsbToRgb(props.hue, 1, 0.5);
+        const hue = parseFloat(color.hue);
+        let [r, g, b] = hsbToRgb(hue, 1, 0.5);
+
         switch (mode) {
             case "hue":
                 return {
@@ -34,19 +51,19 @@ const ColorDisplay = (props: ColorDisplayProps) => {
     return (
         <>
             {
-                ["hue", "brightness", "saturation"].map(attr => (
+                ["hue", "brightness", "saturation"].map((attr) => (
                     <div key={attr} className="bg-white p-2">
                         <div className="flex justify-between items-center">
                             <span className="uppercase font-bold text-sm">{attr}</span>
-                            <span className="font-bold text-sm">{props[attr]}</span>
+                            <span className="font-bold text-sm">{color[attr as SliderMode]}</span>
                         </div>
                         <input
                             className="color-slider appearance-none"
-                            style={getBackgroundForSliderMode(attr)}
+                            style={getBackgroundForSliderMode(attr as SliderMode)}
                             type="range"
                             min="0"
                             max="100"
-                            value={`${props[attr] * 100}`}
+                            value={`${parseFloat(color[attr as SliderMode]) * 100}`}
                             onChange={() => { }}
                         />
                     </div>

@@ -3,8 +3,7 @@ import { useState } from "react";
 import ColorInfo from "~/components/ColorInfo";
 import ColorPicker from "~/components/ColorPicker";
 import ColorPreview from "~/components/ColorPreview";
-
-import { CarColor } from "~/types/color";
+import { CarColor } from "~/types/CarColor";
 
 export const meta: MetaFunction = () => {
   return [

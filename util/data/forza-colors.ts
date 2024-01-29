@@ -1,4 +1,4 @@
-import { CarColor } from "~/types/color";
+import { CarColor } from "~/types/CarColor";
 
 export const colors: CarColor[] = [
   {

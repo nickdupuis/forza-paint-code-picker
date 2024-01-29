@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { colors } from "util/data/forza-colors";
-import { CarColor } from "~/types/color";
+import { CarColor } from "~/types/CarColor";
 
 export interface ColorPickerProps {
     handleColorChange: Function,
