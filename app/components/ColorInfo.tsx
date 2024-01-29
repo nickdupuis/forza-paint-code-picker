@@ -13,7 +13,7 @@ const ColorInfo = ({ selectedColor }: ColorInfoProps) => (
                     <dt className="font-bold">Paint Type</dt>
                     <dd>{selectedColor?.["PAINT TYPE"]}</dd>
                 </dl>
-                <div className="flex gap-16">
+                <div className="flex gap-16 mt-4">
                     <div className="flex flex-col">
                         {selectedColor["COLOR 1 BRIGHTNESS"] && (
                             <h3 className="text-lg font-bold">Color 1</h3>
