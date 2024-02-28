@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,19 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model colors {
+  MAKE               String? @db.VarChar
+  COLOUR_NAME        String? @map("COLOUR NAME") @db.VarChar
+  PAINT_TYPE         String? @map("PAINT TYPE") @db.VarChar
+  COLOR_1_HUE        String? @map("COLOR 1 HUE") @db.VarChar
+  COLOR_1_SATURATION String? @map("COLOR 1 SATURATION") @db.VarChar
+  COLOR_1_BRIGHTNESS String? @map("COLOR 1 BRIGHTNESS") @db.VarChar
+  COLOR_2_HUE        String? @map("COLOR 2 HUE") @db.VarChar
+  COLOR_2_SATURATION String? @map("COLOR 2 SATURATION") @db.VarChar
+  COLOR_2_BRIGHTNESS String? @map("COLOR 2 BRIGHTNESS") @db.VarChar
+  COMMENTS           String? @db.VarChar
+  id                 Int   @id @default(autoincrement())
 }

@@ -12,6 +12,7 @@
     "build-csv": "python ./util/scripts/forza-color-parser.py"
   },
   "dependencies": {
+    "@prisma/client": "^5.10.2",
     "@remix-run/css-bundle": "^2.5.1",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
