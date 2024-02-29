@@ -16,7 +16,7 @@ export default function ColorId() {
     const selectedColor: CarColor = useLoaderData();
 
     return (
-        <div>
+        <div className="flex gap-12">
             <ColorInfo selectedColor={selectedColor} />
             <ColorPreview selectedColor={selectedColor} />
         </div>

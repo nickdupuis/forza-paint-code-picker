@@ -12,9 +12,17 @@ export default function HexToHsb() {
         const nextValue = e.target.value;
         const convertedHex = hexToHsb(nextValue);
         const color: CarColor = {
-            "COLOR 1 HUE": convertedHex[0].toFixed(2),
-            "COLOR 1 SATURATION": convertedHex[1].toFixed(2),
-            "COLOR 1 BRIGHTNESS": convertedHex[2].toFixed(2),
+            "id": "",
+            "MAKE": "",
+            "COLOUR_NAME": "",
+            "PAINT_TYPE": "",
+            "COLOR_1_HUE": convertedHex[0].toFixed(2),
+            "COLOR_1_SATURATION": convertedHex[1].toFixed(2),
+            "COLOR_1_BRIGHTNESS": convertedHex[2].toFixed(2),
+            "COLOR_2_BRIGHTNESS": "",
+            "COLOR_2_SATURATION": "",
+            "COLOR_2_HUE": "",
+            "COMMENTS": ""
         };
 
         setHex(nextValue);

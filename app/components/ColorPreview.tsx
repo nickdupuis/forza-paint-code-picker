@@ -42,7 +42,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
     }, [selectedColor]);
 
     return selectedColor ? (
-        <>
+        <div className="flex flex-col justify-center items-center">
             <h3 className="text-lg font-bold">Preview</h3>
             <div className="flex">
                 <div className="flex flex-col">
@@ -64,7 +64,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     ) : (<></>);
 };
 
