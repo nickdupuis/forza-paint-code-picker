@@ -23,6 +23,12 @@ npm run dev
 
 This starts your app in development mode, rebuilding assets on file changes.
 
+This project uses prisma to connect to a Postgres database.  You can use the csv in `util/data` to build a database, then create a `.env.` file at the root of the project containing the following: 
+
+```
+DATABASE_URL="postgresql://your_db_username:your_db_password@localhost:5432/your_db_name?schema=public"
+```
+
 ## Deployment
 
 First, build your app for production:
