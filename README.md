@@ -1,4 +1,15 @@
-# Welcome to Remix!
+# Forza Motorsport Color Picker
+
+A side project based off of the [Colour Creation Database]()
+
+Shows a preview of a selected color, along with the HSB values:
+![image](docs/assets/img/forza-colors.gif)
+
+And converts hex codes to forza HSB codes:
+![image](docs/assets/img/forza-colors-hexconvert.gif)
+
+
+## Remix.js Stuff
 
 - [Remix Docs](https://remix.run/docs)
 
@@ -18,7 +29,7 @@ First, build your app for production:
 
 ```sh
 npm run build
-```
+```P
 
 Then run the app in production mode:
 
