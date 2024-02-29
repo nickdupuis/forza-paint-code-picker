@@ -19,9 +19,9 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
     useEffect(() => {
         if (selectedColor) {
             setColor({
-                hue: selectedColor?.[`COLOR ${colorNumber} HUE`],
-                saturation: selectedColor?.[`COLOR ${colorNumber} SATURATION`],
-                brightness: selectedColor?.[`COLOR ${colorNumber} BRIGHTNESS`],
+                hue: selectedColor?.[`COLOR_${colorNumber}_HUE`],
+                saturation: selectedColor?.[`COLOR_${colorNumber}_SATURATION`],
+                brightness: selectedColor?.[`COLOR_${colorNumber}_BRIGHTNESS`],
             });
         }
     }, [selectedColor]);

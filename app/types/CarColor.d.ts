@@ -1,12 +1,13 @@
 export type CarColor = {
+    id: string;
     MAKE: string;
-    "COLOUR NAME": string;
-    "PAINT TYPE": string;
-    "COLOR 1 HUE": string;
-    "COLOR 1 SATURATION": string;
-    "COLOR 1 BRIGHTNESS": string;
-    "COLOR 2 HUE": string;
-    "COLOR 2 SATURATION": string;
-    "COLOR 2 BRIGHTNESS": string;
+    "COLOUR_NAME": string;
+    "PAINT_TYPE": string;
+    "COLOR_1_HUE": string;
+    "COLOR_1_SATURATION": string;
+    "COLOR_1_BRIGHTNESS": string;
+    "COLOR_2_HUE": string;
+    "COLOR_2_SATURATION": string;
+    "COLOR_2_BRIGHTNESS": string;
     "COMMENTS": string;
 };

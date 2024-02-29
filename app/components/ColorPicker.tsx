@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { colors } from "util/data/forza-colors";
 import { CarColor } from "~/types/CarColor";
 
 export interface ColorPickerProps {
+    colors: CarColor[],
     handleColorChange: Function,
 };
 
-const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
+const ColorPicker = ({ colors, handleColorChange }: ColorPickerProps) => {
     // Keeps track of the selected manufacturer
     const [selectedManufacturer, setSelectedManufacturer] = useState<string>();
 
@@ -26,15 +26,15 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
         setColorNameOptions(nextColorOptions);
 
         // Update the selected color to the first in the list when the options
-        if (nextColorOptions.length && nextColorOptions[0]["COLOUR NAME"]) {
-            setSelectedColorName(nextColorOptions[0]["COLOUR NAME"]);
+        if (nextColorOptions.length && nextColorOptions[0]["COLOUR_NAME"]) {
+            setSelectedColorName(nextColorOptions[0]["COLOUR_NAME"]);
         }
     }, [selectedManufacturer])
 
     // Notify parent component of selected color change
     useEffect(() => {
         if (handleColorChange) {
-            const color: CarColor = colors.find(color => color.MAKE === selectedManufacturer && color["COLOUR NAME"] === selectedColorName)!;
+            const color: CarColor = colors.find(color => color.MAKE === selectedManufacturer && color["COLOUR_NAME"] === selectedColorName)!;
             handleColorChange(color);
         }
     }, [selectedColorName]);
@@ -55,7 +55,7 @@ const ColorPicker = ({ handleColorChange }: ColorPickerProps) => {
                 <select className="block w-48" onChange={(e) => setSelectedColorName(e.target.value)}>
                     <option value="" disabled>Select a color</option>
                     {colorNameOptions.map((color, idx) => (
-                        <option key={color["COLOUR NAME"] + idx}>{color["COLOUR NAME"]}</option>
+                        <option key={color["COLOUR_NAME"] + idx}>{color["COLOUR_NAME"]}</option>
                     ))}
                 </select>
             </label>

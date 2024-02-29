@@ -23,13 +23,13 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
             let color1RGB: number[], color2RGB: number[];
 
             // Parse out the "L"s and "R"s
-            hue1Decimal = parseFloat(selectedColor?.["COLOR 1 HUE"]);
-            saturation1Decimal = parseFloat(selectedColor?.["COLOR 1 SATURATION"]);
-            brightness1Decimal = parseFloat(selectedColor?.["COLOR 1 BRIGHTNESS"]);
+            hue1Decimal = parseFloat(selectedColor?.["COLOR_1_HUE"]);
+            saturation1Decimal = parseFloat(selectedColor?.["COLOR_1_SATURATION"]);
+            brightness1Decimal = parseFloat(selectedColor?.["COLOR_1_BRIGHTNESS"]);
 
-            hue2Decimal = parseFloat(selectedColor?.["COLOR 2 HUE"]);
-            saturation2Decimal = parseFloat(selectedColor?.["COLOR 2 SATURATION"]);
-            brightness2Decimal = parseFloat(selectedColor?.["COLOR 2 BRIGHTNESS"]);
+            hue2Decimal = parseFloat(selectedColor?.["COLOR_2_HUE"]);
+            saturation2Decimal = parseFloat(selectedColor?.["COLOR_2_SATURATION"]);
+            brightness2Decimal = parseFloat(selectedColor?.["COLOR_2_BRIGHTNESS"]);
 
             // Get the RGB values for color 1
             color1RGB = hsbToRgb(hue1Decimal, saturation1Decimal, brightness1Decimal);
@@ -53,7 +53,7 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
                     />
                 </div>
                 <div className="flex flex-col">
-                    {selectedColor?.["COLOR 2 BRIGHTNESS"] && (
+                    {selectedColor?.["COLOR_2_BRIGHTNESS"] && (
                         <>
                             <span>Color 2:</span>
                             <div
