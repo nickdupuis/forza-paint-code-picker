@@ -1,1 +1,0 @@
-import{r as e,j as t}from"./jsx-runtime-56DGgGmo.js";const l=()=>[{title:"Forza Color Selector"}];function a(){const[r,o]=e.useState();return t.jsx("div",{className:"flex flex-col bg-gray-300 p-8 h-screen"})}export{a as default,l as meta};
