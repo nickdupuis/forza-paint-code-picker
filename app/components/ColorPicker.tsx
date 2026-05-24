@@ -4,6 +4,7 @@ import { CarColor } from "~/types/CarColor";
 export interface ColorPickerProps {
     colors: CarColor[],
     handleColorChange: Function,
+    initialColor?: CarColor,
 };
 
 interface SearchableSelectProps {
@@ -64,18 +65,20 @@ function SearchableSelect({ label, options, value, placeholder, onChange }: Sear
     );
 }
 
-const ColorPicker = ({ colors, handleColorChange }: ColorPickerProps) => {
+const ColorPicker = ({ colors, handleColorChange, initialColor }: ColorPickerProps) => {
     // Keeps track of the selected manufacturer
-    const [selectedManufacturer, setSelectedManufacturer] = useState<string>("");
+    const [selectedManufacturer, setSelectedManufacturer] = useState<string>(initialColor?.MAKE || "");
 
     // List of manufacturers to display
     const manufacturers = [...new Set(colors.map(c => c.MAKE))];
 
     // List of available colors to display
-    const [colorNameOptions, setColorNameOptions] = useState<CarColor[]>([]);
+    const [colorNameOptions, setColorNameOptions] = useState<CarColor[]>(
+        initialColor ? colors.filter(c => c.MAKE === initialColor.MAKE) : []
+    );
 
     // Keeps track of the selected color
-    const [selectedColorName, setSelectedColorName] = useState<string>("");
+    const [selectedColorName, setSelectedColorName] = useState<string>(initialColor?.COLOUR_NAME || "");
 
     // Update the color options when a manufacturer is selected
     useEffect(() => {
