@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
 import ColorInfo from "~/components/ColorInfo";
 import ColorPreview from "~/components/ColorPreview";
-import prisma from "~/prisma";
+import { loadColors } from "~/helpers/loadColors";
 import { CarColor } from "~/types/CarColor";
 
 export const meta: MetaFunction = () => {
@@ -24,9 +24,7 @@ export default function ColorId() {
 }
 
 export async function loader({ params }: LoaderFunctionArgs) {
-    return json(await prisma.colors.findFirst({
-        where: {
-            id: parseInt(params.colorId!)
-        }
-    }));
+    const colors = loadColors();
+    const color = colors.find((c) => c.id === params.colorId);
+    return json(color ?? null);
 }
