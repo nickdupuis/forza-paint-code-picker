@@ -53,7 +53,7 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
     return (
         <div className="space-y-3">
             {
-                ["hue", "brightness", "saturation"].map((attr) => (
+                ["hue", "saturation", "brightness"].map((attr) => (
                     <div key={attr} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <div className="flex justify-between items-center mb-1.5">
                             <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">{attr}</span>
