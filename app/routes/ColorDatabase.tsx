@@ -6,7 +6,8 @@ import { CarColor } from "~/types/CarColor";
 
 export const meta: MetaFunction = () => {
     return [
-        { title: "Forza Color Selector" },
+        { title: "Forza Horizon Paint Code Database | Search 10,000+ Colors" },
+        { name: "description", content: "Search Forza Horizon paint codes by manufacturer and color name. Get exact HSB slider values for any car color including Porsche, BMW, Ferrari, and more." },
     ];
 };
 

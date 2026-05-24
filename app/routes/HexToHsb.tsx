@@ -1,8 +1,16 @@
+import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import ColorDisplay from "~/components/ColorDisplay";
 import ColorPreview from "~/components/ColorPreview";
 import { hexToHsb } from "~/helpers/hexToHSB";
 import { CarColor } from "~/types/CarColor";
+
+export const meta: MetaFunction = () => {
+    return [
+        { title: "Hex to HSB Converter for Forza Horizon | Paint Code Tool" },
+        { name: "description", content: "Convert any hex color code to Forza Horizon HSB slider values. Paste a hex code and get the exact hue, saturation, and brightness values for the in-game paint editor." },
+    ];
+};
 
 export default function HexToHsb() {
     const [hex, setHex] = useState("");

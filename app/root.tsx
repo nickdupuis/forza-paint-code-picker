@@ -14,12 +14,29 @@ import forzaLogo from "./static/img/forza-logo.png";
 
 export const links: LinksFunction = () => [];
 
+const siteUrl = "https://nickdupuis.github.io/forza-paint-code-picker";
+const siteTitle = "Forza Horizon Paint Code Database | Find Any Color";
+const siteDescription = "Browse 10,000+ Forza Horizon paint codes. Search by manufacturer and color name to get exact HSB slider values. Also convert hex colors to Forza HSB format.";
+const siteImage = `${siteUrl}/og-image.png`;
+
 export function HydrateFallback() {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{siteTitle}</title>
+        <meta name="description" content={siteDescription} />
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:description" content={siteDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={siteUrl} />
+        <meta property="og:image" content={siteImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={siteTitle} />
+        <meta name="twitter:description" content={siteDescription} />
+        <meta name="twitter:image" content={siteImage} />
+        <link rel="canonical" href={siteUrl} />
         <Meta />
         <Links />
       </head>

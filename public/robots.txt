@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nickdupuis.github.io/forza-paint-code-picker/sitemap.xml
