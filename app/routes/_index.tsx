@@ -1,24 +1,11 @@
-import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
-import { CarColor } from "~/types/CarColor";
+import { redirect } from "@remix-run/react";
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Forza Color Selector" },
-  ];
+export const clientLoader = () => {
+  return redirect("colorDatabase");
 };
 
+clientLoader.hydrate = true;
+
 export default function Index() {
-  // Stores the color selected from ColorPicker
-  const [selectedColor, setSelectedColor] = useState<CarColor>();
-
-  // Handle the change from ColorPicker
-  const onColorChange = (color: CarColor) => {
-    setSelectedColor(color);
-  };
-
-  return (
-    <div className="flex flex-col bg-gray-300 p-8 h-screen">
-    </div>
-  );
+  return null;
 }

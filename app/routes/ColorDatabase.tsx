@@ -21,15 +21,15 @@ export default function ColorDatabase() {
     };
 
     return (
-        <div className="flex flex-col bg-gray-300 p-8 h-screen">
-            <div className="flex items-center gap-12">
-                <section>
+        <div className="space-y-8">
+            <div className="flex flex-col lg:flex-row gap-8">
+                <section className="lg:w-72 flex-shrink-0">
                     <ColorPicker
                         colors={colorList}
                         handleColorChange={onColorChange}
                     />
                 </section>
-                <section>
+                <section className="flex-1">
                     <Outlet />
                 </section>
             </div>

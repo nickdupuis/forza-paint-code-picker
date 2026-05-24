@@ -51,16 +51,16 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
     };
 
     return (
-        <>
+        <div className="space-y-3">
             {
                 ["hue", "brightness", "saturation"].map((attr) => (
-                    <div key={attr} className="bg-white p-2">
-                        <div className="flex justify-between items-center gap-2">
-                            <span className="uppercase font-bold text-sm">{attr}</span>
-                            <span className="font-bold text-sm">{color[attr as SliderMode]}</span>
+                    <div key={attr} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="flex justify-between items-center mb-1.5">
+                            <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">{attr}</span>
+                            <span className="font-mono text-xs text-fuchsia-600">{color[attr as SliderMode]}</span>
                         </div>
                         <input
-                            className="color-slider appearance-none w-full border border-black"
+                            className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300"
                             style={getBackgroundForSliderMode(attr as SliderMode)}
                             type="range"
                             min="0"
@@ -71,7 +71,7 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
                     </div>
                 ))
             }
-        </>
+        </div>
 
 
     );

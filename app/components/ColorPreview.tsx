@@ -42,23 +42,23 @@ const ColorPreview = ({ selectedColor }: ColorPreviewProps) => {
     }, [selectedColor]);
 
     return selectedColor ? (
-        <div className="flex flex-col justify-center items-center">
-            <h3 className="text-lg font-bold">Preview</h3>
-            <div className="flex">
-                <div className="flex flex-col">
-                    <span>Color 1:</span>
+        <div className="flex flex-col items-center gap-3">
+            <h3 className="text-sm font-bold text-fuchsia-600 uppercase tracking-wide">Preview</h3>
+            <div className="flex gap-4">
+                <div className="flex flex-col items-center gap-1.5">
+                    <span className="text-xs text-gray-400">Color 1</span>
                     <div
                         style={previewColor1}
-                        className="w-20 h-20 border border-gray-900 mr-16"
+                        className="w-24 h-24 rounded-xl border-2 border-gray-200 shadow-lg shadow-gray-200/50"
                     />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center gap-1.5">
                     {selectedColor?.["COLOR_2_BRIGHTNESS"] && (
                         <>
-                            <span>Color 2:</span>
+                            <span className="text-xs text-gray-400">Color 2</span>
                             <div
                                 style={previewColor2}
-                                className="w-20 h-20 border border-gray-900"
+                                className="w-24 h-24 rounded-xl border-2 border-gray-200 shadow-lg shadow-gray-200/50"
                             />
                         </>
                     )}

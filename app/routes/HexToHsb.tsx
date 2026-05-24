@@ -30,24 +30,27 @@ export default function HexToHsb() {
     };
 
     return (
-        <div className="flex gap-8 bg-gray-300 p-8 h-screen">
-            <div>
-                <label>
-                    <span className="mr-2">Input Hex Code: </span>
+        <div className="flex flex-col lg:flex-row gap-8">
+            <div className="lg:w-72 flex-shrink-0">
+                <label className="flex flex-col gap-1.5">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Input Hex Code</span>
                     <input
                         value={hex}
                         onChange={handleHexChange}
-                        placeholder=""
+                        placeholder="#FF5500"
+                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent font-mono"
                     />
-                    {color && (
-                        <div className="mt-4">
-                            <ColorDisplay colorNumber={1} selectedColor={color} />
-                        </div>
-                    )}
                 </label>
+                {color && (
+                    <div className="mt-6">
+                        <ColorDisplay colorNumber={1} selectedColor={color} />
+                    </div>
+                )}
             </div>
-            <aside>
-                <ColorPreview selectedColor={color} />
+            <aside className="flex-1">
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                    <ColorPreview selectedColor={color} />
+                </div>
             </aside>
         </div>
     );

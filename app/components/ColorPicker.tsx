@@ -40,19 +40,19 @@ const ColorPicker = ({ colors, handleColorChange }: ColorPickerProps) => {
     }, [selectedColorName]);
 
     return (
-        <div className="flex flex-col">
-            <label>
-                Manufacturer
-                <select className="block w-48" defaultValue="" onChange={(e) => setSelectedManufacturer(e.target.value)}>
+        <div className="flex flex-col gap-4">
+            <label className="flex flex-col gap-1.5">
+                <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Manufacturer</span>
+                <select className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent" defaultValue="" onChange={(e) => setSelectedManufacturer(e.target.value)}>
                     <option value="" disabled>Select a manufacturer</option>
                     {manufacturers.map((manufacturer) => (
                         <option key={manufacturer}>{manufacturer}</option>
                     ))}
                 </select>
             </label>
-            <label>
-                Color
-                <select className="block w-48" onChange={(e) => setSelectedColorName(e.target.value)}>
+            <label className="flex flex-col gap-1.5">
+                <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">Color</span>
+                <select className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent" onChange={(e) => setSelectedColorName(e.target.value)}>
                     <option value="" disabled>Select a color</option>
                     {colorNameOptions.map((color, idx) => (
                         <option key={color["COLOUR_NAME"] + idx}>{color["COLOUR_NAME"]}</option>

@@ -3,6 +3,7 @@ import {
   Link,
   Links,
   Meta,
+  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -22,20 +23,28 @@ export function HydrateFallback() {
         <Meta />
         <Links />
       </head>
-      <body className="flex">
-        <div className="sidebar h-screen flex-shrink-0 p-4 bg-gray-900 text-white">
-          <div className="bg-white rounded-full p-4">
-            <img src={forzaLogo} className="w-24" />
+      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+        <header className="border-b border-gray-800 bg-gray-950 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-8">
+            <div className="flex items-center gap-3">
+              <img src={forzaLogo} className="h-10 w-auto" alt="Forza Horizon 6" />
+              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">Paint Codes</span>
+            </div>
+            <nav className="flex gap-1">
+              <Link to="/colorDatabase" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                Color Database
+              </Link>
+              <Link to="/hexToHsb" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                Hex to HSB
+              </Link>
+            </nav>
           </div>
-          <h2 className="font-bold text-center">Color Tools</h2>
-          <nav className="flex flex-col items-center gap-2 mt-4">
-            <Link to="/colorDatabase">Color Database</Link>
-            <Link to="/hexToHsb">Hex to HSB</Link>
-          </nav>
-        </div>
-        <div className="main flex-1">
-          <p>Loading...</p>
-        </div>
+        </header>
+        <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+          <div className="flex items-center justify-center h-64">
+            <div className="w-6 h-6 border-2 border-fuchsia-400 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </main>
         <Scripts />
       </body>
     </html>
@@ -51,20 +60,26 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="flex">
-        <div className="sidebar h-screen flex-shrink-0 p-4 bg-gray-900 text-white">
-          <div className="bg-white rounded-full p-4">
-            <img src={forzaLogo} className="w-24" />
+      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+        <header className="border-b border-gray-800 bg-gray-950 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center gap-8">
+            <div className="flex items-center gap-3">
+              <img src={forzaLogo} className="h-10 w-auto" alt="Forza Horizon 6" />
+              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">Paint Codes</span>
+            </div>
+            <nav className="flex gap-1">
+              <NavLink to="/colorDatabase" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
+                Color Database
+              </NavLink>
+              <NavLink to="/hexToHsb" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
+                Hex to HSB
+              </NavLink>
+            </nav>
           </div>
-          <h2 className="font-bold text-center">Color Tools</h2>
-          <nav className="flex flex-col items-center gap-2 mt-4">
-            <Link to="/colorDatabase">Color Database</Link>
-            <Link to="/hexToHsb">Hex to HSB</Link>
-          </nav>
-        </div>
-        <div className="main flex-1">
+        </header>
+        <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
           <Outlet />
-        </div>
+        </main>
         <ScrollRestoration />
         <Scripts />
       </body>
