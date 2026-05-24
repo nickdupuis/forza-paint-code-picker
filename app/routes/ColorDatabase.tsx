@@ -1,7 +1,6 @@
-import { json, type MetaFunction } from "@remix-run/node";
+import type { MetaFunction } from "@remix-run/node";
 import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
 import ColorPicker from "~/components/ColorPicker";
-import { loadColors } from "~/helpers/loadColors";
 import { CarColor } from "~/types/CarColor";
 
 export const meta: MetaFunction = () => {
@@ -38,6 +37,9 @@ export default function ColorDatabase() {
     );
 }
 
-export const loader = async () => {
-    return json(loadColors());
+export const clientLoader = async () => {
+    const res = await fetch(`${import.meta.env.BASE_URL}colors.json`);
+    return res.json();
 };
+
+clientLoader.hydrate = true;
