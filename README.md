@@ -1,55 +1,31 @@
-# Forza Motorsport Color Picker
+# Forza Horizon 6 Paint Code Picker
 
-A side project based off of the [Colour Creation Database]()
+## **[Live App](https://nickdupuis.github.io/forza-paint-code-picker/)**
 
-Shows a preview of a selected color, along with the HSB values:
-![image](docs/assets/img/forza-colors.gif)
+---
 
-And converts hex codes to forza HSB codes:
-![image](docs/assets/img/forza-colors-hexconvert.gif)
+## What is this?
 
+In Forza Horizon, you can create custom paint jobs by dialing in HSB (Hue, Saturation, Brightness) values on sliders. This app is a reference tool that lets you look up exact slider values for thousands of real-world car colors — so you can recreate manufacturer paints in-game without guessing.
 
-## Remix.js Stuff
+**Features:**
+- Browse 10,000+ real car colors by manufacturer and color name
+- See the exact HSB slider positions for Color 1 and Color 2 (for two-tone / metal flake paints)
+- Live color preview so you know what it looks like before you start painting
+- Hex-to-HSB converter for matching any color you find online
 
-- [Remix Docs](https://remix.run/docs)
+## Credits
+
+Color data sourced from the [Colour Creation Database](https://www.gtplanet.net/forum/threads/forza-horizon-4-colour-creation-database-work-in-progress.384407/) on GTPlanet.
 
 ## Development
-
-From your terminal:
 
 ```sh
 npm run dev
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
-
-This project uses prisma to connect to a Postgres database.  You can use the csv in `util/data` to build a database, then create a `.env.` file at the root of the project containing the following: 
-
-```
-DATABASE_URL="postgresql://your_db_username:your_db_password@localhost:5432/your_db_name?schema=public"
-```
-
-## Deployment
-
-First, build your app for production:
+## Deploy to GitHub Pages
 
 ```sh
-npm run build
-```P
-
-Then run the app in production mode:
-
-```sh
-npm start
+npm run deploy
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
