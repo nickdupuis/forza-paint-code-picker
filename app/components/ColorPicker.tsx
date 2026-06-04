@@ -50,9 +50,9 @@ function SearchableSelect({ label, options, value, placeholder, onChange }: Sear
                     {filtered.length === 0 && (
                         <li className="px-3 py-2 text-sm text-gray-400">No results</li>
                     )}
-                    {filtered.map((option) => (
+                    {filtered.map((option, index) => (
                         <li
-                            key={option}
+                            key={`${option}-${index}`}
                             className={`px-3 py-2 text-sm cursor-pointer hover:bg-fuchsia-50 hover:text-fuchsia-600 ${option === value ? 'bg-fuchsia-50 text-fuchsia-600' : 'text-gray-900'}`}
                             onMouseDown={() => { onChange(option); setIsOpen(false); setSearch(""); }}
                         >
