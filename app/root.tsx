@@ -51,6 +51,9 @@ export function HydrateFallback() {
               <Link to="/colorDatabase" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
                 Color Database
               </Link>
+              <Link to="/hueSuggestions" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                Hue Suggestions
+              </Link>
               <Link to="/hexToHsb" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
                 Hex to HSB
               </Link>
@@ -87,6 +90,9 @@ export default function App() {
             <nav className="flex gap-1">
               <NavLink to="/colorDatabase" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
                 Color Database
+              </NavLink>
+              <NavLink to="/hueSuggestions" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
+                Hue Suggestions
               </NavLink>
               <NavLink to="/hexToHsb" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
                 Hex to HSB
