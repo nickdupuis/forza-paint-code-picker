@@ -8,7 +8,8 @@ export interface ColorDisplayProps {
     selectedColor: CarColor;
 };
 
-type SliderMode = "hue" | "saturation" | "brightness";
+const SLIDER_MODES = ["hue", "saturation", "brightness"] as const;
+type SliderMode = (typeof SLIDER_MODES)[number];
 
 const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
 
@@ -48,19 +49,19 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
     return (
         <div className="space-y-3">
             {
-                ["hue", "saturation", "brightness"].map((attr) => (
-                    <div key={attr} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                SLIDER_MODES.map((mode) => (
+                    <div key={mode} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                         <div className="flex justify-between items-center mb-1.5">
-                            <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">{attr}</span>
-                            <span className="font-mono text-xs text-fuchsia-600">{color[attr as SliderMode]}</span>
+                            <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">{mode}</span>
+                            <span className="font-mono text-xs text-fuchsia-600">{color[mode]}</span>
                         </div>
                         <input
                             className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300"
-                            style={{ backgroundImage: getBackgroundForSliderMode(attr as SliderMode) }}
+                            style={{ backgroundImage: getBackgroundForSliderMode(mode) }}
                             type="range"
                             min="0"
                             max="100"
-                            value={`${parseFloat(color[attr as SliderMode]) * 100}`}
+                            value={`${parseFloat(color[mode]) * 100}`}
                             onChange={() => { }}
                         />
                     </div>
