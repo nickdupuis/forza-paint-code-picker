@@ -16,14 +16,21 @@ interface SearchableSelectProps {
 }
 
 function SearchableSelect({ label, options, value, placeholder, onChange }: SearchableSelectProps) {
+    // State for the search query and dropdown visibility
     const [search, setSearch] = useState("");
+
+    // State to track if the dropdown is open
     const [isOpen, setIsOpen] = useState(false);
+
+    // Ref for the dropdown container to handle outside clicks
     const ref = useRef<HTMLDivElement>(null);
 
+    // Filter options based on search query
     const filtered = search
         ? options.filter(o => o.toLowerCase().includes(search.toLowerCase()))
         : options;
 
+    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClick = (e: MouseEvent) => {
             if (ref.current && !ref.current.contains(e.target as Node)) {
