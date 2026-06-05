@@ -26,28 +26,23 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
         }
     }, [selectedColor]);
 
-    const getBackgroundForSliderMode = (mode: SliderMode) => {
+    const getBackgroundForSliderMode = (mode: SliderMode): string => {
         // Get a rough estimate of the color based on hue
         const hue = parseFloat(color.hue);
         let [r, g, b] = hsbToRgb(hue, 1, 0.5);
 
         switch (mode) {
             case "hue":
-                return {
-                    backgroundImage: "linear-gradient(to right, red, orange, yellow, green, cyan, blue, indigo, red)"
-                };
+                return "linear-gradient(to right, red, orange, yellow, green, cyan, blue, indigo, red)";
             case "saturation":
                 // fades from white to color
-                return {
-                    backgroundImage: `linear-gradient(to right, white, rgb(${r}, ${g}, ${b})`
-                }
+                return `linear-gradient(to right, white, rgb(${r}, ${g}, ${b}))`;
             case "brightness":
                 // fades from black to color
-                return {
-                    backgroundImage: `linear-gradient(to right, black, rgb(${r}, ${g}, ${b})`
-                };
+                return `linear-gradient(to right, black, rgb(${r}, ${g}, ${b}))`;
         }
 
+        return "";
     };
 
     return (
@@ -61,7 +56,7 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
                         </div>
                         <input
                             className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300"
-                            style={getBackgroundForSliderMode(attr as SliderMode)}
+                            style={{ backgroundImage: getBackgroundForSliderMode(attr as SliderMode) }}
                             type="range"
                             min="0"
                             max="100"
