@@ -12,7 +12,14 @@ interface HueBand {
     ranges: Array<{ min: number; max: number }>;
 }
 
+const BLACK_MAX_BRIGHTNESS = 0.18;
+const BLACK_MAX_SATURATION = 0.25;
+const WHITE_MIN_BRIGHTNESS = 0.85;
+const WHITE_MAX_SATURATION = 0.2;
+
 const HUE_BANDS: HueBand[] = [
+    { value: "white", label: "White", ranges: [] },
+    { value: "black", label: "Black", ranges: [] },
     { value: "red", label: "Red", ranges: [{ min: 0, max: 0.04 }, { min: 0.96, max: 1 }] },
     { value: "orange", label: "Orange", ranges: [{ min: 0.04, max: 0.10 }] },
     { value: "yellow", label: "Yellow", ranges: [{ min: 0.10, max: 0.18 }] },
@@ -31,6 +38,25 @@ function parseHue(value: string): number | null {
 function matchesHueBand(color: CarColor, bandValue: string): boolean {
     if (bandValue === "any") {
         return true;
+    }
+
+    const saturation = parseHue(color.COLOR_1_SATURATION);
+    const brightness = parseHue(color.COLOR_1_BRIGHTNESS);
+
+    if (bandValue === "black") {
+        if (saturation === null || brightness === null) {
+            return false;
+        }
+
+        return brightness <= BLACK_MAX_BRIGHTNESS && saturation <= BLACK_MAX_SATURATION;
+    }
+
+    if (bandValue === "white") {
+        if (saturation === null || brightness === null) {
+            return false;
+        }
+
+        return brightness >= WHITE_MIN_BRIGHTNESS && saturation <= WHITE_MAX_SATURATION;
     }
 
     const hueBand = HUE_BANDS.find((band) => band.value === bandValue);
