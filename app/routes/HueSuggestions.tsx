@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useEffect, useMemo, useState } from "react";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 import ColorInfo from "~/components/ColorInfo";
 import ColorPreview from "~/components/ColorPreview";
 import { hsbToRgb } from "~/helpers/hsbToRgb";
@@ -16,6 +16,8 @@ const BLACK_MAX_BRIGHTNESS = 0.18;
 const BLACK_MAX_SATURATION = 0.25;
 const WHITE_MIN_BRIGHTNESS = 0.85;
 const WHITE_MAX_SATURATION = 0.2;
+const DEFAULT_HUE = "red";
+const DEFAULT_FINISH = "any";
 
 const HUE_BANDS: HueBand[] = [
     { value: "white", label: "White", ranges: [] },
@@ -89,6 +91,7 @@ function getSwatchStyle(color: CarColor): { backgroundColor: string } {
     return { backgroundColor: `rgb(${r}, ${g}, ${b})` };
 }
 
+
 export const meta: MetaFunction = () => {
     return [
         { title: "Forza Hue Finder | Explore Colors by Hue + Finish" },
@@ -102,8 +105,20 @@ export const meta: MetaFunction = () => {
 
 export default function HueSuggestions() {
     const colors = useLoaderData<CarColor[]>();
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const finishOptions = useMemo(() => {
+    const initialHueFromUrl = searchParams.get("hue") || DEFAULT_HUE;
+    const initialFinishFromUrl = searchParams.get("finish") || DEFAULT_FINISH;
+    const initialSearchFromUrl = searchParams.get("q") || "";
+    const initialColorIdFromUrl = searchParams.get("colorId") || "";
+
+    const [selectedHue, setSelectedHue] = useState<string>(initialHueFromUrl);
+    const [selectedFinish, setSelectedFinish] = useState<string>(initialFinishFromUrl);
+    const [searchTerm, setSearchTerm] = useState<string>(initialSearchFromUrl);
+    const [selectedColorId, setSelectedColorId] = useState<string>(initialColorIdFromUrl);
+    const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
+
+    const finishOptions = useMemo<Array<{ value: string; label: string }>>(() => {
         const uniquePaintTypes = [...new Set(
             colors
                 .map((color) => color.PAINT_TYPE.trim())
@@ -115,10 +130,20 @@ export default function HueSuggestions() {
         return [{ value: "any", label: "Any finish" }, ...uniquePaintTypes.map((paintType) => ({ value: paintType, label: paintType }))];
     }, [colors]);
 
-    const [selectedHue, setSelectedHue] = useState<string>("red");
-    const [selectedFinish, setSelectedFinish] = useState<string>("any");
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    const [selectedColorId, setSelectedColorId] = useState<string>("");
+    const hasValidHue = selectedHue === "any" || HUE_BANDS.some((band) => band.value === selectedHue);
+
+    useEffect(() => {
+        if (!hasValidHue) {
+            setSelectedHue(DEFAULT_HUE);
+        }
+    }, [hasValidHue, selectedHue]);
+
+    useEffect(() => {
+        const hasValidFinish = finishOptions.some((option) => option.value === selectedFinish);
+        if (!hasValidFinish) {
+            setSelectedFinish(DEFAULT_FINISH);
+        }
+    }, [finishOptions, selectedFinish]);
 
     const filteredColors = useMemo(() => {
         const search = searchTerm.trim().toLowerCase();
@@ -138,7 +163,6 @@ export default function HueSuggestions() {
 
     useEffect(() => {
         if (!filteredColors.length) {
-            setSelectedColorId("");
             return;
         }
 
@@ -148,15 +172,77 @@ export default function HueSuggestions() {
         }
     }, [filteredColors, selectedColorId]);
 
+    useEffect(() => {
+        const nextParams = new URLSearchParams();
+
+        if (selectedHue !== DEFAULT_HUE) {
+            nextParams.set("hue", selectedHue);
+        }
+
+        if (selectedFinish !== DEFAULT_FINISH) {
+            nextParams.set("finish", selectedFinish);
+        }
+
+        const trimmedSearch = searchTerm.trim();
+        if (trimmedSearch.length > 0) {
+            nextParams.set("q", trimmedSearch);
+        }
+
+        if (selectedColorId) {
+            nextParams.set("colorId", selectedColorId);
+        }
+
+        if (nextParams.toString() !== searchParams.toString()) {
+            setSearchParams(nextParams, { replace: true });
+        }
+    }, [selectedHue, selectedFinish, searchTerm, selectedColorId, searchParams, setSearchParams]);
+
     const selectedColor = useMemo(
-        () => filteredColors.find((color) => color.id === selectedColorId) ?? null,
-        [filteredColors, selectedColorId],
+        () => colors.find((color) => color.id === selectedColorId) ?? null,
+        [colors, selectedColorId],
     );
+
+    const handleCopyShareLink = async () => {
+        try {
+            const shareUrl = window.location.href;
+            await navigator.clipboard.writeText(shareUrl);
+            setCopyStatus("copied");
+        } catch {
+            setCopyStatus("error");
+        }
+    };
+
+    useEffect(() => {
+        if (copyStatus === "idle") {
+            return;
+        }
+
+        const timeout = window.setTimeout(() => {
+            setCopyStatus("idle");
+        }, 1800);
+
+        return () => window.clearTimeout(timeout);
+    }, [copyStatus]);
 
     return (
         <div className="space-y-6">
             <section className="bg-gray-50 border border-gray-200 rounded-2xl p-5 md:p-6">
-                <h1 className="text-xl font-bold text-gray-900">Suggest Colors by Hue</h1>
+                <div className="flex items-start justify-between gap-3">
+                    <h1 className="text-xl font-bold text-gray-900">Suggest Colors by Hue</h1>
+                    <button
+                        type="button"
+                        onClick={handleCopyShareLink}
+                        className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-700 hover:border-fuchsia-300 hover:bg-fuchsia-50"
+                    >
+                        Copy Share Link
+                    </button>
+                </div>
+                {copyStatus === "copied" && (
+                    <p className="mt-2 text-xs text-emerald-700">Share link copied.</p>
+                )}
+                {copyStatus === "error" && (
+                    <p className="mt-2 text-xs text-amber-700">Could not copy automatically. Copy URL from the address bar.</p>
+                )}
                 <p className="text-sm text-gray-600 mt-1">
                     Pick a hue and optionally stack a finish filter (for example, orange + metal flake) to explore matching colors across all manufacturers.
                 </p>
