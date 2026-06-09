@@ -57,6 +57,9 @@ export function HydrateFallback() {
               <Link to="/hexToHsb" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
                 Hex to HSB
               </Link>
+              <Link to="/colorMixer" className="px-4 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                Color Mixer
+              </Link>
             </nav>
           </div>
         </header>
@@ -96,6 +99,9 @@ export default function App() {
               </NavLink>
               <NavLink to="/hexToHsb" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
                 Hex to HSB
+              </NavLink>
+              <NavLink to="/colorMixer" className={({ isActive }) => `px-4 py-2 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-fuchsia-500/10 text-fuchsia-400' : 'text-gray-400 hover:text-white hover:bg-gray-800'}`}>
+                Color Mixer
               </NavLink>
             </nav>
           </div>

@@ -5,6 +5,7 @@ import ColorDisplay from "~/components/ColorDisplay";
 import ColorInfo from "~/components/ColorInfo";
 import ColorPreview from "~/components/ColorPreview";
 import { hexToHsb } from "~/helpers/hexToHSB";
+import { findClosestMatches } from "~/helpers/colorMatching";
 import { CarColor } from "~/types/CarColor";
 
 const HEX_MATCH_LIMIT = 8;
@@ -17,34 +18,6 @@ function normalizeHex(value: string): string | null {
 
     const withHash = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
     return /^#([0-9A-Fa-f]{3}){1,2}$/.test(withHash) ? withHash : null;
-}
-
-function parseValue(value: string): number | null {
-    const parsed = Number.parseFloat(value);
-    return Number.isFinite(parsed) ? parsed : null;
-}
-
-function clamp01(value: number): number {
-    return Math.min(1, Math.max(0, value));
-}
-
-function normalizeHueValue(value: number): number {
-    const wrapped = value % 1;
-    return wrapped < 0 ? wrapped + 1 : wrapped;
-}
-
-function hueDistance(a: number, b: number): number {
-    const distance = Math.abs(normalizeHueValue(a) - normalizeHueValue(b));
-    return Math.min(distance, 1 - distance);
-}
-
-function similarityScore(target: [number, number, number], candidate: [number, number, number]): number {
-    const hueDiff = hueDistance(target[0], candidate[0]);
-    const satDiff = Math.abs(clamp01(target[1]) - clamp01(candidate[1]));
-    const briDiff = Math.abs(clamp01(target[2]) - clamp01(candidate[2]));
-    const weightedDistance = hueDiff * 0.55 + satDiff * 0.25 + briDiff * 0.2;
-
-    return Math.min(100, Math.max(0, Math.round((1 - weightedDistance) * 100)));
 }
 
 export const meta: MetaFunction = () => {
@@ -85,29 +58,10 @@ export default function HexToHsb() {
 
     const bestMatches = useMemo(() => {
         if (!normalizedHex) {
-            return [] as Array<{ color: CarColor; score: number }>;
+            return [];
         }
 
-        const target = hexToHsb(normalizedHex);
-
-        return colors
-            .map((datasetColor) => {
-                const hue = parseValue(datasetColor.COLOR_1_HUE);
-                const saturation = parseValue(datasetColor.COLOR_1_SATURATION);
-                const brightness = parseValue(datasetColor.COLOR_1_BRIGHTNESS);
-
-                if (hue === null || saturation === null || brightness === null) {
-                    return null;
-                }
-
-                return {
-                    color: datasetColor,
-                    score: similarityScore(target, [normalizeHueValue(hue), clamp01(saturation), clamp01(brightness)]),
-                };
-            })
-            .filter((entry): entry is { color: CarColor; score: number } => entry !== null)
-            .sort((a, b) => b.score - a.score)
-            .slice(0, HEX_MATCH_LIMIT);
+        return findClosestMatches(colors, hexToHsb(normalizedHex), HEX_MATCH_LIMIT);
     }, [colors, normalizedHex]);
 
     useEffect(() => {
