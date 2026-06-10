@@ -53,7 +53,9 @@ export function HydrateFallback() {
           <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <img src={forzaLogo} className="h-8 sm:h-10 w-auto" alt="Forza Horizon 6" />
-              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">Paint Codes</span>
+              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+                Paint Codes
+              </span>
             </div>
             <nav className="hidden md:flex gap-1">
               {navItems.map((item) => (
@@ -96,7 +98,9 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <img src={forzaLogo} className="h-8 sm:h-10 w-auto" alt="Forza Horizon 6" />
-              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">Paint Codes</span>
+              <span className="font-bold text-sm tracking-tight bg-gradient-to-r from-pink-500 to-fuchsia-500 bg-clip-text text-transparent">
+                Paint Codes
+              </span>
             </div>
             <nav className="hidden md:flex gap-1">
               {navItems.map((item) => (
