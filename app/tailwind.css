@@ -2,8 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for the color slider handle that require an odd selector, 
+/* Custom styles for the color slider handle that require an odd selector,
 so putting it in here */
+@media (pointer: coarse) {
+    .color-slider {
+        /* Keep touch drag on sliders from scrolling the page on phones */
+        touch-action: none;
+    }
+}
+
+.color-slider {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 .color-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
