@@ -119,8 +119,45 @@ export default function ColorMixer() {
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-80 flex-shrink-0 space-y-6">
-                <div>
+            <div className="order-1 lg:hidden">
+                <h1 className="text-xl font-bold text-gray-900">Color Mixer</h1>
+                <p className="text-sm text-gray-600 mt-1">
+                    Drag the sliders to build a color and get its hex code plus the closest paint-code matches.
+                </p>
+            </div>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 order-2 lg:hidden">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Mixed Color</h2>
+                <ColorPreview selectedColor={mixedColor} />
+            </div>
+
+            <aside className="flex-1 order-4 lg:order-2">
+                <div className="space-y-6">
+                    <div className="hidden lg:block bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Mixed Color</h2>
+                        <ColorPreview selectedColor={mixedColor} />
+                    </div>
+
+                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Best Match Details</h2>
+                        {selectedMatch ? (
+                            <>
+                                <h3 className="text-lg font-bold text-gray-900 mb-1">{selectedMatch.COLOUR_NAME}</h3>
+                                <p className="text-sm text-gray-500 mb-6">{selectedMatch.MAKE}</p>
+                                <div className="flex flex-col xl:flex-row gap-8">
+                                    <ColorInfo selectedColor={selectedMatch} />
+                                    <ColorPreview selectedColor={selectedMatch} />
+                                </div>
+                            </>
+                        ) : (
+                            <p className="text-sm text-gray-500">Choose a match to see full details and preview.</p>
+                        )}
+                    </div>
+                </div>
+            </aside>
+
+            <div className="lg:w-80 flex-shrink-0 space-y-6 order-3 lg:order-1">
+                <div className="hidden lg:block">
                     <h1 className="text-xl font-bold text-gray-900">Color Mixer</h1>
                     <p className="text-sm text-gray-600 mt-1">
                         Drag the sliders to build a color and get its hex code plus the closest paint-code matches.
@@ -171,7 +208,7 @@ export default function ColorMixer() {
                     )}
                 </label>
 
-                <div>
+                <div className="hidden lg:block">
                     <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
                         Closest Paint-Code Matches
                     </h3>
@@ -201,30 +238,34 @@ export default function ColorMixer() {
                 </div>
             </div>
 
-            <aside className="flex-1">
-                <div className="space-y-6">
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Mixed Color</h2>
-                        <ColorPreview selectedColor={mixedColor} />
-                    </div>
+            <div className="order-5 lg:hidden">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">
+                    Closest Paint-Code Matches
+                </h3>
+                <ul className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                    {bestMatches.map((match) => {
+                        const isSelected = match.color.id === selectedMatchId;
 
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Best Match Details</h2>
-                        {selectedMatch ? (
-                            <>
-                                <h3 className="text-lg font-bold text-gray-900 mb-1">{selectedMatch.COLOUR_NAME}</h3>
-                                <p className="text-sm text-gray-500 mb-6">{selectedMatch.MAKE}</p>
-                                <div className="flex flex-col xl:flex-row gap-8">
-                                    <ColorInfo selectedColor={selectedMatch} />
-                                    <ColorPreview selectedColor={selectedMatch} />
-                                </div>
-                            </>
-                        ) : (
-                            <p className="text-sm text-gray-500">Choose a match to see full details and preview.</p>
-                        )}
-                    </div>
-                </div>
-            </aside>
+                        return (
+                            <li key={match.color.id}>
+                                <button
+                                    type="button"
+                                    onClick={() => setSelectedMatchId(match.color.id)}
+                                    className={`w-full text-left rounded-lg border px-3 py-2 transition ${
+                                        isSelected
+                                            ? "border-fuchsia-300 bg-fuchsia-50"
+                                            : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                    }`}
+                                >
+                                    <p className="text-sm font-semibold text-gray-900 truncate">{match.color.COLOUR_NAME}</p>
+                                    <p className="text-xs text-gray-500 truncate">{match.color.MAKE}</p>
+                                    <p className="text-xs text-gray-500">Match {match.score}%</p>
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
         </div>
     );
 }
