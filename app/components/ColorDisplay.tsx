@@ -25,7 +25,7 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
                 brightness: selectedColor?.[`COLOR_${colorNumber}_BRIGHTNESS`],
             });
         }
-    }, [selectedColor]);
+    }, [colorNumber,selectedColor]);
 
     const getBackgroundForSliderMode = (mode: SliderMode): string => {
         // Get a rough estimate of the color based on hue
