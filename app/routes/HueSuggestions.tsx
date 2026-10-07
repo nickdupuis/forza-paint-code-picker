@@ -16,7 +16,7 @@ const BLACK_MAX_BRIGHTNESS = 0.18;
 const BLACK_MAX_SATURATION = 0.25;
 const WHITE_MIN_BRIGHTNESS = 0.85;
 const WHITE_MAX_SATURATION = 0.2;
-const DEFAULT_HUE = "red";
+const DEFAULT_HUE = "any";
 const DEFAULT_FINISH = "any";
 
 const HUE_BANDS: HueBand[] = [
