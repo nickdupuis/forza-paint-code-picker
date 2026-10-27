@@ -24,6 +24,7 @@ const navItems = [
   { to: "/colorDatabase", label: "Color Database" },
   { to: "/hueSuggestions", label: "Hue Suggestions" },
   { to: "/hexToHsb", label: "Hex to HSB" },
+  { to: "/photoColorMatcher", label: "Photo Match" },
   { to: "/colorMixer", label: "Color Mixer" },
 ];
 

@@ -1,6 +1,10 @@
 import { CarColor } from "~/types/CarColor";
 
 export type ColorMatch = { color: CarColor; score: number };
+export type ChannelColorMatch = ColorMatch & { channel: 1 | 2 };
+export type PhotoColorMatches = { primary: ChannelColorMatch[]; secondary: ChannelColorMatch[] };
+
+const PHOTO_BRIGHTNESS_TOLERANCE = 0.25;
 
 export function parseValue(value: string): number | null {
     const parsed = Number.parseFloat(value);
@@ -68,4 +72,47 @@ export function findClosestMatches(
         .filter((entry): entry is ColorMatch => entry !== null)
         .sort((a, b) => b.score - a.score)
         .slice(0, limit);
+}
+
+export function findClosestPhotoMatches(
+    colors: CarColor[],
+    target: [number, number, number],
+    limit: number,
+): PhotoColorMatches {
+    const matches: PhotoColorMatches = { primary: [], secondary: [] };
+
+    for (const color of colors) {
+        for (const channel of [1, 2] as const) {
+            const hue = parseValue(color[`COLOR_${channel}_HUE`]);
+            const saturation = parseValue(color[`COLOR_${channel}_SATURATION`]);
+            const brightness = parseValue(color[`COLOR_${channel}_BRIGHTNESS`]);
+
+            if (hue === null || saturation === null || brightness === null) {
+                continue;
+            }
+
+            const hueDiff = hueDistance(target[0], hue);
+            const saturationDiff = Math.abs(clamp01(target[1]) - clamp01(saturation));
+            const brightnessDiff = Math.max(
+                0,
+                Math.abs(clamp01(target[2]) - clamp01(brightness)) - PHOTO_BRIGHTNESS_TOLERANCE,
+            );
+            const weightedDistance = hueDiff * 0.55 + saturationDiff * 0.25 + brightnessDiff * 0.2;
+            const match: ChannelColorMatch = {
+                color,
+                channel,
+                score: Math.min(100, Math.max(0, Math.round((1 - weightedDistance) * 100))),
+            };
+
+            matches[channel === 1 ? "primary" : "secondary"].push(match);
+        }
+    }
+
+    matches.primary.sort((a, b) => b.score - a.score);
+    matches.secondary.sort((a, b) => b.score - a.score);
+
+    return {
+        primary: matches.primary.slice(0, limit),
+        secondary: matches.secondary.slice(0, limit),
+    };
 }
