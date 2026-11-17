@@ -120,37 +120,37 @@ export default function ColorMixer() {
     return (
         <div className="flex flex-col lg:flex-row gap-8">
             <div className="order-1 lg:hidden">
-                <h1 className="text-xl font-bold text-gray-900">Color Mixer</h1>
-                <p className="text-sm text-gray-600 mt-1">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Color Mixer</h1>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                     Drag the sliders to build a color and get its hex code plus the closest paint-code matches.
                 </p>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 order-2 lg:hidden">
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Mixed Color</h2>
+            <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 order-2 lg:hidden">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">Mixed Color</h2>
                 <ColorPreview selectedColor={mixedColor} />
             </div>
 
             <aside className="flex-1 order-4 lg:order-2">
                 <div className="space-y-6">
-                    <div className="hidden lg:block bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Mixed Color</h2>
+                    <div className="hidden lg:block bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">Mixed Color</h2>
                         <ColorPreview selectedColor={mixedColor} />
                     </div>
 
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Best Match Details</h2>
+                    <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Best Match Details</h2>
                         {selectedMatch ? (
                             <>
-                                <h3 className="text-lg font-bold text-gray-900 mb-1">{selectedMatch.COLOUR_NAME}</h3>
-                                <p className="text-sm text-gray-500 mb-6">{selectedMatch.MAKE}</p>
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">{selectedMatch.COLOUR_NAME}</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{selectedMatch.MAKE}</p>
                                 <div className="flex flex-col xl:flex-row gap-8">
                                     <ColorInfo selectedColor={selectedMatch} />
                                     <ColorPreview selectedColor={selectedMatch} />
                                 </div>
                             </>
                         ) : (
-                            <p className="text-sm text-gray-500">Choose a match to see full details and preview.</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Choose a match to see full details and preview.</p>
                         )}
                     </div>
                 </div>
@@ -158,20 +158,20 @@ export default function ColorMixer() {
 
             <div className="lg:w-80 flex-shrink-0 space-y-6 order-3 lg:order-1">
                 <div className="hidden lg:block">
-                    <h1 className="text-xl font-bold text-gray-900">Color Mixer</h1>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Color Mixer</h1>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                         Drag the sliders to build a color and get its hex code plus the closest paint-code matches.
                     </p>
                 </div>
 
                 <div className="space-y-3">
                     {SLIDER_MODES.map((mode) => (
-                        <div key={mode} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div key={mode} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                             <div className="flex justify-between items-center mb-1.5">
                                 <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">
                                     {SLIDER_LABELS[mode]}
                                 </span>
-                                <span className="font-mono text-xs text-fuchsia-600">{hsb[mode].toFixed(2)}</span>
+                                <span className="font-mono text-xs text-fuchsia-600 dark:text-fuchsia-400">{hsb[mode].toFixed(2)}</span>
                             </div>
                             <input
                                 className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300"
@@ -192,19 +192,19 @@ export default function ColorMixer() {
                         <input
                             value={hex}
                             readOnly
-                            className="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 font-mono focus:outline-none"
+                            className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 font-mono focus:outline-none"
                         />
                         <button
                             type="button"
                             onClick={handleCopyHex}
-                            className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold uppercase tracking-wide text-gray-700 hover:border-fuchsia-300 hover:bg-fuchsia-50"
+                            className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-200 hover:border-fuchsia-300 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-950/40"
                         >
                             Copy
                         </button>
                     </div>
-                    {copyStatus === "copied" && <span className="text-xs text-emerald-700">Hex copied.</span>}
+                    {copyStatus === "copied" && <span className="text-xs text-emerald-700 dark:text-emerald-400">Hex copied.</span>}
                     {copyStatus === "error" && (
-                        <span className="text-xs text-amber-700">Could not copy automatically.</span>
+                        <span className="text-xs text-amber-700 dark:text-amber-400">Could not copy automatically.</span>
                     )}
                 </label>
 
@@ -223,13 +223,13 @@ export default function ColorMixer() {
                                         onClick={() => setSelectedMatchId(match.color.id)}
                                         className={`w-full text-left rounded-lg border px-3 py-2 transition ${
                                             isSelected
-                                                ? "border-fuchsia-300 bg-fuchsia-50"
-                                                : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                                ? "border-fuchsia-300 bg-fuchsia-50 dark:border-fuchsia-700 dark:bg-fuchsia-950/50"
+                                                : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-fuchsia-200 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                                         }`}
                                     >
-                                        <p className="text-sm font-semibold text-gray-900 truncate">{match.color.COLOUR_NAME}</p>
-                                        <p className="text-xs text-gray-500 truncate">{match.color.MAKE}</p>
-                                        <p className="text-xs text-gray-500">Match {match.score}%</p>
+                                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{match.color.COLOUR_NAME}</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{match.color.MAKE}</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">Match {match.score}%</p>
                                     </button>
                                 </li>
                             );
@@ -253,13 +253,13 @@ export default function ColorMixer() {
                                     onClick={() => setSelectedMatchId(match.color.id)}
                                     className={`w-full text-left rounded-lg border px-3 py-2 transition ${
                                         isSelected
-                                            ? "border-fuchsia-300 bg-fuchsia-50"
-                                            : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                            ? "border-fuchsia-300 bg-fuchsia-50 dark:border-fuchsia-700 dark:bg-fuchsia-950/50"
+                                            : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-fuchsia-200 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                                     }`}
                                 >
-                                    <p className="text-sm font-semibold text-gray-900 truncate">{match.color.COLOUR_NAME}</p>
-                                    <p className="text-xs text-gray-500 truncate">{match.color.MAKE}</p>
-                                    <p className="text-xs text-gray-500">Match {match.score}%</p>
+                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{match.color.COLOUR_NAME}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{match.color.MAKE}</p>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400">Match {match.score}%</p>
                                 </button>
                             </li>
                         );

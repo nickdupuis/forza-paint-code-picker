@@ -332,22 +332,22 @@ export default function PhotoColorMatcher() {
                             aria-pressed={isSelected}
                             className={`w-full rounded-xl border px-3 py-2.5 text-left transition ${
                                 isSelected
-                                    ? "border-fuchsia-300 bg-fuchsia-50"
-                                    : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                    ? "border-fuchsia-300 bg-fuchsia-50 dark:border-fuchsia-700 dark:bg-fuchsia-950/50"
+                                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-fuchsia-200 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                             }`}
                         >
                             <span className="flex items-start gap-3">
                                 <span
                                     aria-hidden="true"
-                                    className="mt-0.5 h-7 w-7 shrink-0 rounded-md border border-gray-200"
+                                    className="mt-0.5 h-7 w-7 shrink-0 rounded-md border border-gray-200 dark:border-gray-700"
                                     style={{ backgroundColor: getChannelSwatch(match) }}
                                 />
                                 <span className="min-w-0 flex-1">
-                                    <span className="block truncate text-sm font-semibold text-gray-900">
+                                    <span className="block truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
                                         {match.color.COLOUR_NAME}
                                     </span>
-                                    <span className="block truncate text-xs text-gray-500">{match.color.MAKE}</span>
-                                    <span className="mt-1 block text-xs text-gray-500">Similarity {match.score}%</span>
+                                    <span className="block truncate text-xs text-gray-500 dark:text-gray-400">{match.color.MAKE}</span>
+                                    <span className="mt-1 block text-xs text-gray-500 dark:text-gray-400">Similarity {match.score}%</span>
                                 </span>
                             </span>
                         </button>
@@ -360,20 +360,20 @@ export default function PhotoColorMatcher() {
     return (
         <div className="space-y-6">
             <header>
-                <h1 className="text-xl font-bold text-gray-900">Match a paint from an image</h1>
-                <p className="mt-1 text-sm text-gray-600">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Match a paint from an image</h1>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                     Choose a photo or screenshot, then sample a point to find similar Forza paint colors. Images stay on this device and are never uploaded.
                 </p>
             </header>
 
-            <section className="space-y-4 rounded-2xl border border-gray-200 bg-gray-50 p-4 md:p-5">
+            <section className="space-y-4 rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-4 md:p-5">
                 <div className="flex items-center justify-between gap-3">
-                    <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Source image</h2>
+                    <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Source image</h2>
                     {loadedImage && (
                         <button
                             type="button"
                             onClick={clearImage}
-                            className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:border-fuchsia-300 hover:bg-fuchsia-50"
+                            className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-1.5 text-xs font-semibold text-gray-700 dark:text-gray-200 hover:border-fuchsia-300 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-950/40"
                         >
                             Clear image
                         </button>
@@ -389,8 +389,8 @@ export default function PhotoColorMatcher() {
                     onDrop={handleDrop}
                     className={`group relative flex min-h-36 cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed px-4 py-6 text-center transition-colors ${
                         isDragging
-                            ? "border-fuchsia-400 bg-fuchsia-50"
-                            : "border-gray-300 bg-white hover:border-fuchsia-300 hover:bg-fuchsia-50/40"
+                            ? "border-fuchsia-400 bg-fuchsia-50 dark:bg-fuchsia-950/50"
+                            : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 hover:border-fuchsia-300 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                     }`}
                 >
                     <input
@@ -402,19 +402,19 @@ export default function PhotoColorMatcher() {
                             event.currentTarget.value = "";
                         }}
                     />
-                    <span className="font-semibold text-gray-800 peer-focus-visible:rounded peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-fuchsia-500">
+                    <span className="font-semibold text-gray-800 dark:text-gray-200 peer-focus-visible:rounded peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-fuchsia-500">
                         Drop, browse, or paste an image
                     </span>
-                    <span className="mt-1 text-xs text-gray-500">PNG, JPEG, or WebP - up to 20 MiB</span>
+                    <span className="mt-1 text-xs text-gray-500 dark:text-gray-400">PNG, JPEG, or WebP - up to 20 MiB</span>
                 </label>
 
-                {isLoadingImage && <p role="status" className="text-sm text-gray-600">Loading and checking image...</p>}
-                {uploadError && <p role="alert" className="text-sm text-amber-700">{uploadError}</p>}
+                {isLoadingImage && <p role="status" className="text-sm text-gray-600 dark:text-gray-300">Loading and checking image...</p>}
+                {uploadError && <p role="alert" className="text-sm text-amber-700 dark:text-amber-400">{uploadError}</p>}
 
                 {loadedImage && (
                     <div className="space-y-3">
-                        <p className="truncate text-xs text-gray-500">{loadedImage.fileName}</p>
-                        <div className="flex justify-center rounded-xl border border-gray-200 bg-gray-100 p-2">
+                        <p className="truncate text-xs text-gray-500 dark:text-gray-400">{loadedImage.fileName}</p>
+                        <div className="flex justify-center rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 p-2">
                             <button
                                 type="button"
                                 onClick={handleImageClick}
@@ -457,7 +457,7 @@ export default function PhotoColorMatcher() {
                                 <legend className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
                                     Sample area
                                 </legend>
-                                <div className="flex flex-wrap gap-1 rounded-lg border border-gray-200 bg-white p-1">
+                                <div className="flex flex-wrap gap-1 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-1">
                                     {([1, 9, 21, 41] as const).map((size) => (
                                         <button
                                             key={size}
@@ -466,8 +466,8 @@ export default function PhotoColorMatcher() {
                                             onClick={() => handleSampleSizeChange(size)}
                                             className={`rounded-md px-3 py-1.5 text-sm font-medium ${
                                                 sampleSize === size
-                                                    ? "bg-gray-900 text-white"
-                                                    : "text-gray-600 hover:bg-gray-100"
+                                                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
+                                                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                             }`}
                                         >
                                             {size === 1 ? "Single pixel" : `${size} x ${size}`}
@@ -478,7 +478,7 @@ export default function PhotoColorMatcher() {
 
                             <div className="flex items-center gap-3">
                                 {samplePoint && (
-                                    <div className="relative h-[110px] w-[110px] shrink-0 overflow-hidden rounded-lg border border-gray-300 bg-white">
+                                    <div className="relative h-[110px] w-[110px] shrink-0 overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800">
                                         <canvas
                                             ref={magnifierRef}
                                             width={110}
@@ -493,72 +493,72 @@ export default function PhotoColorMatcher() {
                                 {sampledColor ? (
                                     <div className="flex min-w-0 items-center gap-3">
                                         <div
-                                            className="h-12 w-12 shrink-0 rounded-md border border-gray-300"
+                                            className="h-12 w-12 shrink-0 rounded-md border border-gray-300 dark:border-gray-600"
                                             style={{ backgroundColor: sampledColor.hex }}
                                         />
                                         <div className="min-w-0">
                                             <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">Sampled color</p>
-                                            <p className="font-mono text-sm font-semibold text-gray-900">{sampledColor.hex}</p>
-                                            <p className="text-xs text-gray-500">HSB {sampledColor.hsb.map((value) => value.toFixed(2)).join(", ")}</p>
+                                            <p className="font-mono text-sm font-semibold text-gray-900 dark:text-gray-100">{sampledColor.hex}</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">HSB {sampledColor.hsb.map((value) => value.toFixed(2)).join(", ")}</p>
                                         </div>
                                     </div>
                                 ) : (
-                                    <p className="text-sm text-gray-500">Click a point in the image to sample it.</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">Click a point in the image to sample it.</p>
                                 )}
                             </div>
                         </div>
-                        {sampleError && <p role="status" className="text-sm text-amber-700">{sampleError}</p>}
+                        {sampleError && <p role="status" className="text-sm text-amber-700 dark:text-amber-400">{sampleError}</p>}
                     </div>
                 )}
             </section>
 
             <section className="grid gap-6 lg:grid-cols-[minmax(16rem,0.9fr)_minmax(0,1.1fr)]">
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 md:p-5">
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-4 md:p-5">
                     <div className="mb-3 flex items-center justify-between gap-3">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Photo matches</h2>
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Photo matches</h2>
                     </div>
 
                     {!sampledColor ? (
-                        <p className="text-sm text-gray-500">Sample a point in the image to see matching paints.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Sample a point in the image to see matching paints.</p>
                     ) : (
                         <>
                             <div>
                                 <div className="mb-2 flex items-center justify-between gap-3">
-                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500">Base paint (Color 1)</h3>
-                                    <span className="text-xs text-gray-500">{photoMatches.primary.length} shown</span>
+                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Base paint (Color 1)</h3>
+                                    <span className="text-xs text-gray-500 dark:text-gray-400">{photoMatches.primary.length} shown</span>
                                 </div>
                                 {photoMatches.primary.length > 0
                                     ? renderMatches(photoMatches.primary)
-                                    : <p className="text-sm text-gray-500">No base paint matches found.</p>}
+                                    : <p className="text-sm text-gray-500 dark:text-gray-400">No base paint matches found.</p>}
                             </div>
 
-                            <div className="mt-6 border-t border-gray-200 pt-4">
+                            <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
                                 <div className="mb-2 flex items-center justify-between gap-3">
-                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500">Flake colors (Color 2)</h3>
-                                    <span className="text-xs text-gray-500">
+                                    <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Flake colors (Color 2)</h3>
+                                    <span className="text-xs text-gray-500 dark:text-gray-400">
                                         {Math.min(photoMatches.secondary.length, SECONDARY_MATCH_LIMIT)} shown
                                     </span>
                                 </div>
                                 {photoMatches.secondary.length > 0
                                     ? renderMatches(photoMatches.secondary.slice(0, SECONDARY_MATCH_LIMIT))
-                                    : <p className="text-sm text-gray-500">No secondary colors found.</p>}
+                                    : <p className="text-sm text-gray-500 dark:text-gray-400">No secondary colors found.</p>}
                             </div>
                         </>
                     )}
                 </div>
 
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 p-5 md:p-6">
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-5 md:p-6">
                     {selectedMatch ? (
                         <>
-                            <h2 className="mb-1 text-lg font-bold text-gray-900">{selectedMatch.COLOUR_NAME}</h2>
-                            <p className="mb-6 text-sm text-gray-500">{selectedMatch.MAKE}</p>
+                            <h2 className="mb-1 text-lg font-bold text-gray-900 dark:text-gray-100">{selectedMatch.COLOUR_NAME}</h2>
+                            <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">{selectedMatch.MAKE}</p>
                             <div className="flex flex-col gap-8 xl:flex-row">
                                 <ColorInfo selectedColor={selectedMatch} />
                                 <ColorPreview selectedColor={selectedMatch} />
                             </div>
                         </>
                     ) : (
-                        <p className="text-sm text-gray-500">Choose a matching paint to see its HSB values and preview.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Choose a matching paint to see its HSB values and preview.</p>
                     )}
                 </div>
             </section>

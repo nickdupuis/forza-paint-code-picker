@@ -226,24 +226,24 @@ export default function HueSuggestions() {
 
     return (
         <div className="space-y-6">
-            <section className="bg-gray-50 border border-gray-200 rounded-2xl p-5 md:p-6">
+            <section className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 md:p-6">
                 <div className="flex items-start justify-between gap-3">
-                    <h1 className="text-xl font-bold text-gray-900">Suggest Colors by Hue</h1>
+                    <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Suggest Colors by Hue</h1>
                     <button
                         type="button"
                         onClick={handleCopyShareLink}
-                        className="inline-flex items-center rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-700 hover:border-fuchsia-300 hover:bg-fuchsia-50"
+                        className="inline-flex items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-200 hover:border-fuchsia-300 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-950/40"
                     >
                         Copy Share Link
                     </button>
                 </div>
                 {copyStatus === "copied" && (
-                    <p className="mt-2 text-xs text-emerald-700">Share link copied.</p>
+                    <p className="mt-2 text-xs text-emerald-700 dark:text-emerald-400">Share link copied.</p>
                 )}
                 {copyStatus === "error" && (
-                    <p className="mt-2 text-xs text-amber-700">Could not copy automatically. Copy URL from the address bar.</p>
+                    <p className="mt-2 text-xs text-amber-700 dark:text-amber-400">Could not copy automatically. Copy URL from the address bar.</p>
                 )}
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                     Pick a hue and optionally stack a finish filter (for example, orange + metal flake) to explore matching colors across all manufacturers.
                 </p>
 
@@ -253,7 +253,7 @@ export default function HueSuggestions() {
                         <select
                             value={selectedHue}
                             onChange={(event) => setSelectedHue(event.target.value)}
-                            className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                         >
                             <option value="any">Any hue</option>
                             {HUE_BANDS.map((band) => (
@@ -269,7 +269,7 @@ export default function HueSuggestions() {
                         <select
                             value={selectedFinish}
                             onChange={(event) => setSelectedFinish(event.target.value)}
-                            className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                         >
                             {finishOptions.map((option) => (
                                 <option value={option.value} key={option.value}>
@@ -285,21 +285,21 @@ export default function HueSuggestions() {
                             value={searchTerm}
                             onChange={(event) => setSearchTerm(event.target.value)}
                             placeholder="Manufacturer, color name, or paint type"
-                            className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
+                            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400"
                         />
                     </label>
                 </div>
             </section>
 
             <section className="grid gap-6 lg:grid-cols-[1.1fr,1fr]">
-                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 md:p-5">
+                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 md:p-5">
                     <div className="flex items-center justify-between gap-3 mb-3">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Matches</h2>
-                        <span className="text-xs text-gray-500">{filteredColors.length.toLocaleString()} found</span>
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Matches</h2>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{filteredColors.length.toLocaleString()} found</span>
                     </div>
 
                     {filteredColors.length === 0 ? (
-                        <p className="text-sm text-gray-500">No colors match these filters yet. Try widening hue or finish.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">No colors match these filters yet. Try widening hue or finish.</p>
                     ) : (
                         <ul className="max-h-[30rem] overflow-y-auto space-y-2 pr-1">
                             {filteredColors.map((color) => {
@@ -312,18 +312,18 @@ export default function HueSuggestions() {
                                             onClick={() => setSelectedColorId(color.id)}
                                             className={`w-full text-left rounded-xl border px-3 py-2.5 transition ${
                                                 isSelected
-                                                    ? "border-fuchsia-300 bg-fuchsia-50"
-                                                    : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                                    ? "border-fuchsia-300 bg-fuchsia-50 dark:border-fuchsia-700 dark:bg-fuchsia-950/50"
+                                                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-fuchsia-200 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                                             }`}
                                         >
                                             <div className="flex items-start gap-3">
                                                 <div
                                                     style={getSwatchStyle(color)}
-                                                    className="w-6 h-6 rounded-md border border-gray-200 shrink-0 mt-0.5"
+                                                    className="w-6 h-6 rounded-md border border-gray-200 dark:border-gray-700 shrink-0 mt-0.5"
                                                 />
                                                 <div className="min-w-0">
-                                                    <p className="text-sm font-semibold text-gray-900 truncate">{color.COLOUR_NAME}</p>
-                                                    <p className="text-xs text-gray-500 truncate">{color.MAKE}</p>
+                                                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{color.COLOUR_NAME}</p>
+                                                    <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{color.MAKE}</p>
                                                     <p className="text-xs text-gray-400 truncate">{color.PAINT_TYPE}</p>
                                                 </div>
                                             </div>
@@ -335,18 +335,18 @@ export default function HueSuggestions() {
                     )}
                 </div>
 
-                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
                     {selectedColor ? (
                         <>
-                            <h2 className="text-lg font-bold text-gray-900 mb-1">{selectedColor.COLOUR_NAME}</h2>
-                            <p className="text-sm text-gray-500 mb-6">{selectedColor.MAKE}</p>
+                            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">{selectedColor.COLOUR_NAME}</h2>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{selectedColor.MAKE}</p>
                             <div className="flex flex-col xl:flex-row gap-8">
                                 <ColorInfo selectedColor={selectedColor} />
                                 <ColorPreview selectedColor={selectedColor} />
                             </div>
                         </>
                     ) : (
-                        <p className="text-sm text-gray-500">Choose a color from the list to see full HSB details and preview.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Choose a color from the list to see full HSB details and preview.</p>
                     )}
                 </div>
             </section>

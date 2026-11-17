@@ -14,6 +14,7 @@ In Forza Horizon, you can create custom paint jobs by dialing in HSB (Hue, Satur
 - Live color preview so you know what it looks like before you start painting
 - Sample colors from a photo or screenshot and find the closest paint-code matches
 - Hex-to-HSB converter for matching any color you find online
+- Automatically follows your system's light or dark appearance preference
 
 ## Credits
 

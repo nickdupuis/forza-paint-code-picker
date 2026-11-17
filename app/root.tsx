@@ -49,7 +49,7 @@ export function HydrateFallback() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+      <body className="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen flex flex-col">
         <header className="border-b border-gray-800 bg-gray-950 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
@@ -94,7 +94,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-white text-gray-900 min-h-screen flex flex-col">
+      <body className="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 min-h-screen flex flex-col">
         <header className="border-b border-gray-800 bg-gray-950 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">

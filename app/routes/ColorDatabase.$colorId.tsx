@@ -16,9 +16,9 @@ export default function ColorId() {
     const selectedColor: CarColor = useLoaderData();
 
     return (
-        <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-1">{selectedColor?.COLOUR_NAME}</h2>
-            <p className="text-sm text-gray-500 mb-6">{selectedColor?.MAKE}</p>
+        <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
+            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">{selectedColor?.COLOUR_NAME}</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{selectedColor?.MAKE}</p>
             <div className="flex flex-col lg:flex-row gap-8">
                 <ColorInfo selectedColor={selectedColor} />
                 <ColorPreview selectedColor={selectedColor} />

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    color-scheme: light dark;
+}
+
 /* Custom styles for the color slider handle that require an odd selector,
 so putting it in here */
 @media (pointer: coarse) {

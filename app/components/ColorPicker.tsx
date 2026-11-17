@@ -46,21 +46,21 @@ function SearchableSelect({ label, options, value, placeholder, onChange }: Sear
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-400">{label}</span>
             <input
                 type="text"
-                className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent"
+                className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent"
                 placeholder={placeholder}
                 value={isOpen ? search : value || ""}
                 onChange={(e) => { setSearch(e.target.value); setIsOpen(true); }}
                 onFocus={() => { setIsOpen(true); setSearch(""); }}
             />
             {isOpen && (
-                <ul className="absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white border border-gray-200 rounded-lg shadow-lg z-20">
+                <ul className="absolute top-full left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-20">
                     {filtered.length === 0 && (
                         <li className="px-3 py-2 text-sm text-gray-400">No results</li>
                     )}
                     {filtered.map((option, index) => (
                         <li
                             key={`${option}-${index}`}
-                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-fuchsia-50 hover:text-fuchsia-600 ${option === value ? 'bg-fuchsia-50 text-fuchsia-600' : 'text-gray-900'}`}
+                            className={`px-3 py-2 text-sm cursor-pointer hover:bg-fuchsia-50 hover:text-fuchsia-600 dark:hover:bg-fuchsia-950/50 dark:hover:text-fuchsia-300 ${option === value ? 'bg-fuchsia-50 text-fuchsia-600 dark:bg-fuchsia-950/50 dark:text-fuchsia-300' : 'text-gray-900 dark:text-gray-100'}`}
                             onMouseDown={() => { onChange(option); setIsOpen(false); setSearch(""); }}
                         >
                             {option}

@@ -50,13 +50,13 @@ const ColorDisplay = ({ colorNumber, selectedColor }: ColorDisplayProps) => {
         <div className="space-y-3">
             {
                 SLIDER_MODES.map((mode) => (
-                    <div key={mode} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                    <div key={mode} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
                         <div className="flex justify-between items-center mb-1.5">
                             <span className="uppercase font-semibold text-xs tracking-wider text-gray-400">{mode}</span>
-                            <span className="font-mono text-xs text-fuchsia-600">{color[mode]}</span>
+                            <span className="font-mono text-xs text-fuchsia-600 dark:text-fuchsia-400">{color[mode]}</span>
                         </div>
                         <input
-                            className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300"
+                            className="color-slider appearance-none w-full h-3 rounded-full border border-gray-300 dark:border-gray-600"
                             style={{ backgroundImage: getBackgroundForSliderMode(mode) }}
                             type="range"
                             min="0"

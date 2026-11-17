@@ -41,8 +41,8 @@ export default function ColorDatabase() {
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-gray-900">Forza color database</h1>
-                <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Forza color database</h1>
+                <p className="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
                     Browse 10,000+ real-world car colors and get the HSB values to recreate them in Forza.
                 </p>
             </div>

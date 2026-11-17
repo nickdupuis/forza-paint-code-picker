@@ -94,11 +94,11 @@ export default function HexToHsb() {
                         value={hex}
                         onChange={handleHexChange}
                         placeholder="#FF5500"
-                        className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent font-mono"
+                        className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 focus:border-transparent font-mono"
                     />
                 </label>
                 {!normalizedHex && hex.trim().length > 0 && (
-                    <p className="text-xs text-amber-600 mt-2">Enter a valid hex color such as #FF5500.</p>
+                    <p className="text-xs text-amber-600 dark:text-amber-400 mt-2">Enter a valid hex color such as #FF5500.</p>
                 )}
                 {color && (
                     <div className="mt-6">
@@ -109,7 +109,7 @@ export default function HexToHsb() {
                 <div className="mt-6">
                     <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Closest Paint-Code Matches</h3>
                     {!normalizedHex ? (
-                        <p className="text-sm text-gray-500">Enter a valid hex to see matches.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Enter a valid hex to see matches.</p>
                     ) : (
                         <ul className="space-y-2 max-h-72 overflow-y-auto pr-1">
                             {bestMatches.map((match) => {
@@ -122,13 +122,13 @@ export default function HexToHsb() {
                                             onClick={() => setSelectedMatchId(match.color.id)}
                                             className={`w-full text-left rounded-lg border px-3 py-2 transition ${
                                                 isSelected
-                                                    ? "border-fuchsia-300 bg-fuchsia-50"
-                                                    : "border-gray-200 bg-white hover:border-fuchsia-200 hover:bg-fuchsia-50/40"
+                                                    ? "border-fuchsia-300 bg-fuchsia-50 dark:border-fuchsia-700 dark:bg-fuchsia-950/50"
+                                                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-fuchsia-200 dark:hover:border-fuchsia-700 hover:bg-fuchsia-50/40 dark:hover:bg-fuchsia-950/30"
                                             }`}
                                         >
-                                            <p className="text-sm font-semibold text-gray-900 truncate">{match.color.COLOUR_NAME}</p>
-                                            <p className="text-xs text-gray-500 truncate">{match.color.MAKE}</p>
-                                            <p className="text-xs text-gray-500">Match {match.score}%</p>
+                                            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{match.color.COLOUR_NAME}</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{match.color.MAKE}</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400">Match {match.score}%</p>
                                         </button>
                                     </li>
                                 );
@@ -139,24 +139,24 @@ export default function HexToHsb() {
             </div>
             <aside className="flex-1">
                 <div className="space-y-6">
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Hex Preview</h2>
+                    <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">Hex Preview</h2>
                         <ColorPreview selectedColor={color} />
                     </div>
 
-                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
-                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Best Match Details</h2>
+                    <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6">
+                        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">Best Match Details</h2>
                         {selectedMatch ? (
                             <>
-                                <h3 className="text-lg font-bold text-gray-900 mb-1">{selectedMatch.COLOUR_NAME}</h3>
-                                <p className="text-sm text-gray-500 mb-6">{selectedMatch.MAKE}</p>
+                                <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">{selectedMatch.COLOUR_NAME}</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{selectedMatch.MAKE}</p>
                                 <div className="flex flex-col xl:flex-row gap-8">
                                     <ColorInfo selectedColor={selectedMatch} />
                                     <ColorPreview selectedColor={selectedMatch} />
                                 </div>
                             </>
                         ) : (
-                            <p className="text-sm text-gray-500">Choose a match to see full details and preview.</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Choose a match to see full details and preview.</p>
                         )}
                     </div>
                 </div>
