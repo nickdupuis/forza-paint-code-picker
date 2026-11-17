@@ -17,6 +17,7 @@ const MAX_IMAGE_PIXELS = 20_000_000;
 const MAGNIFIER_RADIUS = 5;
 const PRIMARY_MATCH_LIMIT = 20;
 const SECONDARY_MATCH_LIMIT = 8;
+const ALL_MANUFACTURERS = "all";
 
 type SampleSize = 1 | 9 | 21 | 41;
 
@@ -104,14 +105,26 @@ export default function PhotoColorMatcher() {
     const [sampledColor, setSampledColor] = useState<SampledColor | null>(null);
     const [sampleError, setSampleError] = useState("");
     const [selectedMatchId, setSelectedMatchId] = useState("");
+    const [selectedManufacturer, setSelectedManufacturer] = useState(ALL_MANUFACTURERS);
     const uploadRequestId = useRef(0);
     const magnifierRef = useRef<HTMLCanvasElement>(null);
 
+    const manufacturers = useMemo(
+        () => [...new Set(colors.map((color) => color.MAKE).filter((make) => make.trim().length > 0))]
+            .sort((a, b) => a.localeCompare(b)),
+        [colors],
+    );
+    const filteredColors = useMemo(
+        () => selectedManufacturer === ALL_MANUFACTURERS
+            ? colors
+            : colors.filter((color) => color.MAKE === selectedManufacturer),
+        [colors, selectedManufacturer],
+    );
     const photoMatches = useMemo(
         () => sampledColor
-            ? findClosestPhotoMatches(colors, sampledColor.hsb, PRIMARY_MATCH_LIMIT)
+            ? findClosestPhotoMatches(filteredColors, sampledColor.hsb, PRIMARY_MATCH_LIMIT)
             : { primary: [], secondary: [] },
-        [colors, sampledColor],
+        [filteredColors, sampledColor],
     );
     const visibleMatches = useMemo(
         () => [...photoMatches.primary, ...photoMatches.secondary.slice(0, SECONDARY_MATCH_LIMIT)],
@@ -514,8 +527,21 @@ export default function PhotoColorMatcher() {
 
             <section className="grid gap-6 lg:grid-cols-[minmax(16rem,0.9fr)_minmax(0,1.1fr)]">
                 <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-4 md:p-5">
-                    <div className="mb-3 flex items-center justify-between gap-3">
+                    <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                         <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Photo matches</h2>
+                        <label className="flex items-center gap-2 text-xs font-semibold text-gray-600 dark:text-gray-300">
+                            <span>Manufacturer</span>
+                            <select
+                                value={selectedManufacturer}
+                                onChange={(event) => setSelectedManufacturer(event.target.value)}
+                                className="max-w-48 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 text-sm font-normal text-gray-900 focus:outline-none focus:ring-2 focus:ring-fuchsia-400 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+                            >
+                                <option value={ALL_MANUFACTURERS}>All manufacturers</option>
+                                {manufacturers.map((manufacturer) => (
+                                    <option value={manufacturer} key={manufacturer}>{manufacturer}</option>
+                                ))}
+                            </select>
+                        </label>
                     </div>
 
                     {!sampledColor ? (
@@ -529,7 +555,11 @@ export default function PhotoColorMatcher() {
                                 </div>
                                 {photoMatches.primary.length > 0
                                     ? renderMatches(photoMatches.primary)
-                                    : <p className="text-sm text-gray-500 dark:text-gray-400">No base paint matches found.</p>}
+                                    : <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        {selectedManufacturer === ALL_MANUFACTURERS
+                                            ? "No base paint matches found."
+                                            : `No base paint matches found for ${selectedManufacturer}.`}
+                                    </p>}
                             </div>
 
                             <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
@@ -541,7 +571,11 @@ export default function PhotoColorMatcher() {
                                 </div>
                                 {photoMatches.secondary.length > 0
                                     ? renderMatches(photoMatches.secondary.slice(0, SECONDARY_MATCH_LIMIT))
-                                    : <p className="text-sm text-gray-500 dark:text-gray-400">No secondary colors found.</p>}
+                                    : <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        {selectedManufacturer === ALL_MANUFACTURERS
+                                            ? "No secondary colors found."
+                                            : `No secondary colors found for ${selectedManufacturer}.`}
+                                    </p>}
                             </div>
                         </>
                     )}
